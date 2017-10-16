@@ -11,12 +11,12 @@
       </head>
       <nav class="navbar navbar-default">
           <ul class="nav navbar-nav">
-            <li><a href="/">Home</a></li>
+            <li><a href="index.html">Home</a></li>
           </ul>
         </nav>
     <style type="text/css">
      body{
-       background-image: url(../static/images/1.jpg);
+       background-image: url(static/images/1.jpg);
        background-size: cover;
        color: white;
        background-repeat: no-repeat;
@@ -54,11 +54,11 @@
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6">
             
-            <form method="POST" action="{{url_for('create')}}">
+            <form method="POST" action="">
                 <h1>Add Recipe</h1>
                     <div class="form-group">
-                        <label>Describe Ingredient</label>
-                        <input type="text" class="form-control" name="recipe" placeholder="Add measurement">
+                        <label>Recipe Name</label>
+                        <input type="text" class="form-control" name="recipe" placeholder="Add recipe">
                         <button type="submit" class="btn btn-primary">Add</button>
 
                     </div>
