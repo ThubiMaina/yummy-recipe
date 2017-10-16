@@ -7,7 +7,7 @@
    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     
-    <title>Home </title>
+    <title>dashboard </title>
     <style type="text/css">
     body{
       
@@ -32,12 +32,12 @@
 </head>
 <nav class="navbar navbar-default">
     <ul class="nav navbar-nav">
-      <li><a href="/">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       
       
 
     </ul>
-    <center><a href="/create" class="btn btn-primary  btn-md  ">Add Another recipe</a></center>
+    <center><a href="create.html" class="btn btn-primary  btn-md  ">Add Another recipe</a></center>
   </nav>
  
 <body style="background-image:  url(../static/images/4.jpg); background-color: #DDD">
@@ -46,8 +46,7 @@
    
     <section>
   
-     <center style="margin-top: 10px; padding: 30px"><h2 style="color: #000000">Welcome to your Recipe List, {{'email'}}</h2><br><h4 style="color: #000000">
-     {{data}}
+     <center style="margin-top: 10px; padding: 30px"><h2 style="color: #000000">Welcome to your Recipe List</h2><br><h4 style="color: #000000">
    <table class="table table-hover">
       <thead>
         <tr>
@@ -57,21 +56,16 @@
         </tr>
       </thead>
       <tbody>
-  
-          
-            {% for d in data%}
           <tr>
-            <td>{{d["category_name"]}}</td>
+            <td></td>
             <td>
             <td>
               <a href="" class="btn btn-primary btn-md ">edit</a>
-              <a href="/addrecipe" class="btn btn-primary  btn-md ">add ingredient</a>
-              <a href="{{url_for('delete', category_name=d['category_name'])}}" class="btn btn-primary  btn-md ">delete</a>
+              <a href="addrecipe.html" class="btn btn-primary  btn-md ">add ingredient</a>
+              <a href="" class="btn btn-primary  btn-md ">delete</a>
             </td>
           </tr>
-               {% endfor %}
-             
-            
+         
       </tbody>
    </table>
    
