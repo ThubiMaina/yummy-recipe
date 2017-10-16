@@ -44,7 +44,7 @@
 </style>
 <nav class="navbar navbar-default">
     <ul class="nav navbar-nav">
-      <li><a href="/">Home</a></li>
+      <li><a href="index.html">Home</a></li>
       
     </ul>
   </nav>
@@ -52,16 +52,10 @@
 
 
   <div class="container">
-    {% if data %}
-    <center><div class="alert alert-warning">
-      <strong>{{data}}</strong>
-    </div></div></center>
-    {% endif%}
-    
     <div class="row">
       <div class="col-sm-offset-3 col-sm-6">
         
-        <form method="POST" action="{{ url_for('register') }}">
+        <form method="POST" action="">
           <h1>Sign Up here</h1>
           <div class="form-group">
             <label>User name</label>
