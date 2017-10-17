@@ -23,7 +23,7 @@
 
 - clone the repository
 
-- FOR HTTPS 
+- FOR HTTPS https://github.com/ThubiMaina/yummy-recipe.git
 
 - FOR SSH 
 
