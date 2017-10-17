@@ -22,5 +22,15 @@ class TestUser(unittest.TestCase):
         result = self.newUser.register('erick@gmail.com', '', '1234', '1234')
         self.assertEqual(6, result, 'User name cannot be empty')
 
+    def test_null_email(self):
+        """method to check if the email is empty"""
+        result = self.newUser.register('', 'Erick', '1234', '1234')
+        self.assertEqual(6, result, 'Email cannot be empty')
+
+    def test_cpassword_is_password(self):
+        """defining method to test for created user's password is equal to confirm password"""
+        output = self.newUser.register('erick@email.com', 'Erick', '1234', '124')
+        self.assertEqual(3, output, "password mismatch")
+
 if __name__ == 'main':
     unittest.main()
