@@ -49,6 +49,12 @@ class TestUser(unittest.TestCase):
         result = self.newUser.login('erick@mail.com', 'pass123')
         self.assertEqual(2, result, "password mismatch")
 
-    
+    def test_email_exists(self):
+        """method to check if email provided has been used to register another user"""
+        self.newUser.users = {}
+        self.newUser.register('erick@gmail.com', 'Erick', '1234', '1234')
+        result = self.newUser.register('erick@gmail.com', 'Maina', 'pass', 'pass')
+        self.assertEqual(4, result, 'This email has been registered')
+
 if __name__ == 'main':
     unittest.main()
