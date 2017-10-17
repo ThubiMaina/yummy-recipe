@@ -37,5 +37,10 @@ class TestUser(unittest.TestCase):
         result = self.newUser.register('erick@gmail.com', 'Erick', '', '1234')
         self.assertEqual(6, result, 'enter the password')
 
+    def test_special_characters(self):
+        """defining method to test for special characters in the user name"""
+        result = self.newUser.register('erick@gmail.com', '##', '1234', '1234')
+        self.assertEqual(5, result, "Username cannot have special characters")
+
 if __name__ == 'main':
     unittest.main()
