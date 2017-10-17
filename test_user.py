@@ -17,5 +17,10 @@ class TestUser(unittest.TestCase):
         result = self.newUser.register('email@mail.com', 'name', '1234', '1234')
         self.assertEqual(current_count+1, result, "User succesfully created")
 
+    def test_null_username(self):
+        """method to checking when user name is empty"""
+        result = self.newUser.register('erick@gmail.com', '', '1234', '1234')
+        self.assertEqual(6, result, 'User name cannot be empty')
+
 if __name__ == 'main':
     unittest.main()
