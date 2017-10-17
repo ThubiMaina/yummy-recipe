@@ -7,8 +7,6 @@ app.secret_key = os.urandom(24)
 """Instantiating objects"""
 newUser = User()
 
-
-
 @app.route('/')
 def home():
     return render_template("home.html")
@@ -44,9 +42,32 @@ def register():
             return render_template('register.html', data=error)
     return render_template('register.html')   
 
-@app.route('/login')
+@app.route('/login' , methods=['GET' , 'POST'])
 def login():
-    return render_template('login.html')
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        result = newUser.login(email, password)
+        if result == 1:
+            username = newUser.get_user_name(email)
+            email = newUser.get_user_email(email)
+            session['user'] = username
+            session['email'] = email
+            return render_template('home.html', data=session)
+        elif result == 2:
+            error = "Wrong Password"
+            return render_template('login.html',data=error) 
+        elif result == 3:
+            error = "The user does not exist please register and try again"
+            return render_template('login.html', data=error)    
+        elif result == 4:
+            error = "Please fill all the fields"
+            return render_template('login.html', data=error)        
+        else:
+            error = "Wrong credentials please try again"
+            return render_template ('login.html',data=error) 
+    else:
+        return render_template('login.html')
 
 @app.route('/create/')
 def create():
