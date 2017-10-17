@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <title>Home </title>
+    <style type="text/css">
+    body{
+      
+
+       background-size: cover;
+       color: white;
+       background-repeat: no-repeat;
+       background-position: center;
+       background-attachment: fixed;
+
+     }
+    section{
+        background-color: rgba(65, 130, 6, 0.54);
+        padding: 30px;
+        margin-top: 50px;
+        margin-bottom: 60px;
+        color: white;
+        box-shadow: 10px 10px 5px rgba(6, 1, 1, 0.43)
+       }
+      
+	</style>
+</head>
+<nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+      <li><a href="/">Home</a></li>
+      
+      
+
+    </ul>
+    <center><a href="/create" class="btn btn-primary  btn-md  ">Add Another recipe</a></center>
+  </nav>
+ 
+<body style="background-image:  url(../static/images/4.jpg); background-color: #DDD">
+  
+  
+   
+    <section>
+  
+     <center style="margin-top: 10px; padding: 30px"><h2 style="color: #000000">Welcome to your Recipe List, {{'email'}}</h2><br><h4 style="color: #000000">
+     {{data}}
+   <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>category</th>
+          <th>Action</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+  
+          
+            {% for d in data%}
+          <tr>
+            <td>{{d["category_name"]}}</td>
+            <td>
+            <td>
+              <a href="" class="btn btn-primary btn-md ">edit</a>
+              <a href="/addrecipe" class="btn btn-primary  btn-md ">add ingredient</a>
+              <a href="{{url_for('delete', category_name=d['category_name'])}}" class="btn btn-primary  btn-md ">delete</a>
+            </td>
+          </tr>
+               {% endfor %}
+             
+            
+      </tbody>
+   </table>
+   
+  </section>
+  <center><footer class="footer" style="margin-top: 100px ; color: #000000 ; font-weight: bold; font-weight: 900;" ><small>copyright @ Yummys' Recipe 2017|Developer @ Maina Erick</small></footer></center>
+
+</body>
+</html>
