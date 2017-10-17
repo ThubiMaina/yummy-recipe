@@ -42,5 +42,13 @@ class TestUser(unittest.TestCase):
         result = self.newUser.register('erick@gmail.com', '##', '1234', '1234')
         self.assertEqual(5, result, "Username cannot have special characters")
 
+    def test_wrong_login_password(self):
+        """defining method to test if login password is equal to register passsword"""
+        self.newUser.users = {}
+        self.newUser.register('erick@mail.com', 'Erick', 'pass', 'pass')
+        result = self.newUser.login('erick@mail.com', 'pass123')
+        self.assertEqual(2, result, "password mismatch")
+
+    
 if __name__ == 'main':
     unittest.main()
