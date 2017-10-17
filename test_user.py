@@ -6,6 +6,7 @@ class TestUser(unittest.TestCase):
     """
     Perform unit testing for the User class
     """
+    # pylint: disable-msg=C0103
     def setUp(self):
         """The setUp method before doing the tests"""
         self.newUser = User()
