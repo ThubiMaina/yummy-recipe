@@ -32,5 +32,10 @@ class TestUser(unittest.TestCase):
         output = self.newUser.register('erick@email.com', 'Erick', '1234', '124')
         self.assertEqual(3, output, "password mismatch")
 
+    def test_null_password(self):
+        """ defining method to check for null pasword"""
+        result = self.newUser.register('erick@gmail.com', 'Erick', '', '1234')
+        self.assertEqual(6, result, 'enter the password')
+
 if __name__ == 'main':
     unittest.main()
