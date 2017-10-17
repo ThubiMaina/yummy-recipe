@@ -53,9 +53,10 @@
 
   <div class="container">
     {% if data %}
-    <center><div class="alert alert-warning">
-      <strong>{{data}}</strong>
-    </div></div></center>
+    <center><div class="alert alert-warning alert-dismissable">
+  <a href="/register" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{data}}</strong>
+</div></center>
     {% endif%}
     
     <div class="row">
