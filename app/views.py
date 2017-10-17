@@ -81,4 +81,10 @@ def display():
 def addrecipe():
     return render_template("addrecipe.html")
 
+@app.route('/logout')
+def logout():
+    """Handles requests to logout a user"""
+    session.pop('email', None)
+    return redirect(url_for('home'))    
+
 
