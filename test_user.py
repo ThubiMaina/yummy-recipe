@@ -9,6 +9,7 @@ class TestUser(unittest.TestCase):
     def setUp(self):
         """The setUp method before doing the tests"""
         self.newUser = User()
+        self.newUser.users = {}
 
     def test_create_account(self):
         """ method to test for creating user account"""
@@ -44,17 +45,31 @@ class TestUser(unittest.TestCase):
 
     def test_wrong_login_password(self):
         """defining method to test if login password is equal to register passsword"""
-        self.newUser.users = {}
         self.newUser.register('erick@mail.com', 'Erick', 'pass', 'pass')
         result = self.newUser.login('erick@mail.com', 'pass123')
         self.assertEqual(2, result, "password mismatch")
 
     def test_email_exists(self):
         """method to check if email provided has been used to register another user"""
-        self.newUser.users = {}
         self.newUser.register('erick@gmail.com', 'Erick', '1234', '1234')
         result = self.newUser.register('erick@gmail.com', 'Maina', 'pass', 'pass')
         self.assertEqual(4, result, 'This email has been registered')
+
+    def test_wrong_login_email(self):
+        """defining method to test if login email is equal to register email"""
+        self.newUser.register('erick@gmail.com', 'Erick', '1234', '1234')
+        result = self.newUser.login('erick35@gmail.com', 'pass')
+        self.assertEqual(3, result, "wrong password")
+
+    def test_login_null_email(self):
+        """defining method to test for null login email"""
+        result = self.newUser.login('', '1234')
+        self.assertEqual(4, result, "Please fill the email field")
+
+    def test_login_null_password(self):
+        """defining method to test for null login password"""
+        result = self.newUser.login('erick@gmail.com', '')
+        self.assertEqual(4, result, "Please fill the password field")
 
 if __name__ == 'main':
     unittest.main()
