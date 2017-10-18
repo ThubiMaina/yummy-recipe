@@ -1,5 +1,5 @@
 # yummy-recipe
- -This is a web application that allow keep a record of their recipes.The main aim is to make your cooking stand out by making sure you have the right ingredients and the right procedure.One may also share their recipes with others.
+ ###### This is a web application that allow keep a record of their recipes.The main aim is to make your cooking stand out by making sure you have the right ingredients and the right procedure.One may also share their recipes with others.
 
 
 - The repository so far contains interfaces without functionality and have published to Github Pages check this [link](https://thubimaina.github.io/yummy-recipe/)
@@ -23,9 +23,9 @@
 
 - clone the repository
 
-- FOR HTTPS 
+- FOR HTTPS https://github.com/ThubiMaina/yummy-recipe.git
 
-- FOR SSH 
+- FOR SSH git@github.com:ThubiMaina/yummy-recipe.git
 
 - Change Directory into the project folder
 
