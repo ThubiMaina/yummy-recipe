@@ -34,7 +34,13 @@ class RecipeCat(object):
         else:
             return 3
 
-    
+    def get_recipecat_lists(self):
+        """defining method to get one recipe categories"""
+        return self.Recipecats
+
+    def get_recipecat_list(self, category):
+        """defining method to get one recipe lists"""
+        return self.Recipecats[category]
 
     def delete(self, category):
         """defining method to delete a recipe category"""
