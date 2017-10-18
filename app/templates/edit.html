@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+ 
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+      </head>
+      <nav class="navbar navbar-default">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+          </ul>
+        </nav>
+    <style type="text/css">
+     body{
+       background-image: url(../static/images/10.jpg);
+       background-size: cover;
+       color: white;
+       background-repeat: no-repeat;
+       background-position: center;
+       background-attachment: fixed;
+
+     }
+     form{
+       background-color: rgba(65, 130, 6, 0.54);
+       padding: 40px;
+       margin-top: 100px;
+       margin-bottom: 60px;
+       color: white;
+       box-shadow: 10px 10px 5px rgba(6, 1, 1, 0.43)
+      }
+      h1{
+        text-align: center;
+
+      }
+      .form-control{
+        border-radius: 0px;
+        background-color: rgba(23, 3, 3, 0.48);
+        color: white;
+        border-radius:1px solid #291212
+      }
+
+
+     
+    </style>
+    <body>
+    
+
+    <div class="container">
+
+      {% if data %}
+    <center><div class="alert alert-warning alert-dismissable">
+  <a href="/create" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{data}}</strong>
+</div></center>
+    {% endif%}
+    
+    <div class="row">
+        <div class="col-sm-offset-3 col-sm-6">
+            {% if data%}
+            <form  action="" method="POST">
+                <h1>Edit The Recipe Category</h1>
+                    
+                    <div class="form-group">
+                            <label>Recipe category</label>
+                            <input type="text" class= "form-control" name="category" value="{{data["category"] }}" placeholder="Appetizer, Dessert,..." > 
+      <input type="hidden"  style="width: 500px" name="old" value="{{data["category"] }}"></center>
+                    </div> 
+                <button type="submit" class="btn btn-primary">Update</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+    </div>
+    <center><footer class="footer" style="margin-top: 100px ; color: #000000 ; font-weight: bold; font-weight: 900;" ><small>copyright @ Yummys' Recipe 2017|Developer @ Maina Erick</small></footer></center>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+  </body>
+</html>
