@@ -73,7 +73,7 @@ def login():
     else:
         return render_template('login.html')
 
-@app.route('/create/', methods=['GET', 'POST'])
+@app.route('/create', methods=['GET', 'POST'])
 def createrecipecats():
     """Handles creation of recipe categories"""
     if  'email' in session:
@@ -93,7 +93,7 @@ def createrecipecats():
             if result == 1:
                 result = newRecipeCat.get_recipecat_lists()   
                 return render_template('display.html', datas=result,)        
-            return redirect('/display/')
+            return redirect('/display')
         else:
             return render_template('create.html')
     else:
