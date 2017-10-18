@@ -35,3 +35,13 @@ class RecipeCat(object):
             return 3
 
     
+
+    def delete(self, category):
+        """defining method to delete a recipe category"""
+        if category in self.Recipecats.keys():
+            #checks if the category being deleted exists
+            del self.Recipecats[category]
+            return 1
+        else:
+            return 2
+
