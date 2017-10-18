@@ -1,11 +1,15 @@
-from flask import Flask, render_template, request, session, redirect, url_for,g
+
 import os
 from user import User
+from recipes import RecipeCat
+from flask import Flask, render_template, request, session, redirect, url_for
+
 from app import app
 
 app.secret_key = os.urandom(24)
 """Instantiating objects"""
 newUser = User()
+newRecipeCat = RecipeCat()
 
 @app.route('/')
 def home():
@@ -69,13 +73,43 @@ def login():
     else:
         return render_template('login.html')
 
-@app.route('/create/')
-def create():
-    return render_template("create.html")
+@app.route('/create/', methods=['GET', 'POST'])
+def createrecipecats():
+    """Handles creation of recipe categories"""
+    if  'email' in session:
+        if request.method == "POST":
+            sentence = request.form['category']
+            Catlist = sentence.split(' ')
+            category = ''.join(Catlist)
+            owner = session['email']
+            result = newRecipeCat.create(category, owner)
+            print(category)
+            if result == 2:
+                error = "that name already exists"
+                return render_template('create.html', data=error)
+            if result == 3:
+                error = "Provide a category name"
+                return render_template('create.html', data=error)                   
+            if result == 1:
+                result = newRecipeCat.get_recipecat_lists()   
+                return render_template('display.html', datas=result,)        
+            return redirect('/display/')
+        else:
+            return render_template('create.html')
+    else:
+        return render_template('login.html')
+
 
 @app.route('/display')
 def display():
-    return render_template('display.html')
+    if  'email' in session:
+        if request.method == 'GET':
+            result = newRecipeCat.get_recipecat_lists()
+            return render_template('display.html', data = result)
+
+    error = 'Log in to see your dashboard'           
+    return render_template('login.html', data=error)    
+
 
 @app.route('/addrecipe')
 def addrecipe():
