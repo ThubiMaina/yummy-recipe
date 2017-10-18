@@ -99,6 +99,25 @@ def createrecipecats():
     else:
         return render_template('login.html')
 
+@app.route('/delete/<category>')
+def delete(category):
+    """define route to delete a recipe category"""
+    if  'email' in session:
+        res = newRecipeCat.get_recipecat_lists()
+        if res:
+            result = newRecipeCat.delete(category)
+            if result == True:
+                message = "successfully deleted"
+                return redirect(url_for('display', data=message))
+            else:
+                message = "Category not deleted"
+                return redirect(url_for('display', data=message))                
+        else:
+            message = "not found"
+            return render_template('create.html', data=message)
+    else:
+        return render_template('create.html')
+    return render_template('login.html')
 
 @app.route('/display')
 def display():
