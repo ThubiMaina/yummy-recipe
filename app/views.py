@@ -28,20 +28,29 @@ def register():
         if result == 1:
             session['user'] = username
             message = "Account created sucessfully"
-            return render_template('login.html', data = message)
-        elif result == 6:
+            return render_template('login.html', data=message)
+
+        elif result == "blank fields":
             message = ("please fill all the fields")
-            return render_template('register.html', data = message)
-        elif result == 5:
+            return render_template('register.html', data=message)
+
+        elif result == "special characters in username":
             message = ("Special characters not allowed in field name")
             return render_template('register.html', data=message)
-        elif result == 3:
+        elif result == "password less than 6":
+            message = (
+                "Password should have minimum six characters")
+            return render_template('register.html', data=message)
+        elif result == "username exists":
+            message = ("Username has alredy been taken")
+            return render_template('register.html', data=message)
+        elif result == "password mismatch":
             message = ("password do not match")
             return render_template('register.html', data=message)
-        elif result == 2:
+        elif result == "invalid email":
             error = "email must be a valid email"
             return render_template('register.html', data=error)
-        elif result == 4:
+        elif result == "email registered":
             error = "email already registered"
             return render_template('register.html', data=error)
     return render_template('register.html')   
@@ -73,7 +82,7 @@ def login():
     else:
         return render_template('login.html')
 
-@app.route('/create', methods=['GET', 'POST'])
+@app.route('/create/', methods=['GET', 'POST'])
 def createrecipecats():
     """Handles creation of recipe categories"""
     if  'email' in session:
