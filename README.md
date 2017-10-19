@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/ThubiMaina/yummy-recipe.svg?branch=develop)](https://travis-ci.org/ThubiMaina/yummy-recipe)
+[![Build Status](https://travis-ci.org/ThubiMaina/yummy-recipe.svg?branch=develop)](https://travis-ci.org/ThubiMaina/yummy-recipe)[![Coverage Status](https://coveralls.io/repos/github/ThubiMaina/yummy-recipe/badge.svg?branch=master)](https://coveralls.io/github/ThubiMaina/yummy-recipe?branch=master)
 
 # yummy-recipe
  ###### This is a web application that allow keep a record of their recipes.The main aim is to make your cooking stand out by making sure you have the right ingredients and the right procedure.One may also share their recipes with others.
