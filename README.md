@@ -1,3 +1,5 @@
+https://travis-ci.org/ThubiMaina/yummy-recipe.svg?branch=develop
+
 # yummy-recipe
  ###### This is a web application that allow keep a record of their recipes.The main aim is to make your cooking stand out by making sure you have the right ingredients and the right procedure.One may also share their recipes with others.
 
