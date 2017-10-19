@@ -51,7 +51,7 @@ class TestUser(unittest.TestCase):
         """defining method to test if login password is equal to register passsword"""
         self.newUser.register(self.email, self.username, self.password, self.cpassword)
         result = self.newUser.login('erick@mail.com', 'pass123')
-        self.assertEqual(2, result,)
+        self.assertEqual(3, result,)
 
     def test_email_exists(self):
         """method to check if email provided has been used to register another user"""
