@@ -34,13 +34,42 @@ class RecipeCat(object):
         else:
             return 3
 
+    def edit(self, old, category, owner):
+        """defining method to delete bucket list"""
+        if category != '':
+            del self.Recipecats[old]
+            self.Recipecats[category] = {
+            'category' : category,
+            'owner' : owner,
+            }
+            return 1
+        else:
+            return 2
+
     def get_recipecat_lists(self):
         """defining method to get one recipe categories"""
         return self.Recipecats
 
+    def get_myrecipe_lists(self, owner):
+        """defining method to get one user's recipe category lists"""
+        data = self.Recipecats
+        my_recipecats = {}
+        for category in data.keys():
+            #loop through the categories in recipe and assign the dictionary to variables
+            recipecat = data[category]
+            recipeowner = recipecat['owner']
+            if recipeowner == owner:
+                my_recipecats[category] = {
+                'category': category,
+                'owner': owner,
+                }
+            else:
+                result = my_recipecats
+        return my_recipecats
+
     def get_recipecat_list(self, category):
         """defining method to get one recipe lists"""
-        return self.Recipecats[category]
+        return self.Recipecats[category]    
 
     def delete(self, category):
         """defining method to delete a recipe category"""
