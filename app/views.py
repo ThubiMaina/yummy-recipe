@@ -1,7 +1,7 @@
 
 import os
 from user import User
-from recipes import RecipeCat
+from recipescat import RecipeCat
 from flask import Flask, render_template, request, session, redirect, url_for
 
 from app import app
