@@ -6,7 +6,7 @@ from flask import Flask, render_template, request, session, redirect, url_for
 
 from app import app
 
-app.secret_key = os.urandom(24)
+
 """Instantiating objects"""
 newUser = User()
 newRecipeCat = RecipeCat()
