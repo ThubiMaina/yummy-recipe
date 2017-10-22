@@ -1,6 +1,7 @@
 """test methods for the user class"""
 import unittest
 from user import User
+from app import app
 
 class TestUser(unittest.TestCase):
     """
@@ -15,6 +16,8 @@ class TestUser(unittest.TestCase):
         self.email = 'erick@gmail.com'
         self.password = '123456'
         self.cpassword = '123456'
+        self.app = app.test_client()
+        self.app.testing = True
 
     def test_create_user(self):
         """ method to test for success in creating user account"""
@@ -25,6 +28,22 @@ class TestUser(unittest.TestCase):
         """ method to test for login success"""
         result = self.newUser.login(self.email, self.password)
         self.assertEqual(1, result)   
+
+    def test_application_up_and_running(self):
+        result = self.app.get('/') 
+        self.assertEqual(result.status_code, 200)
+
+    def test_login_url(self):
+        result = self.app.get('/login/') 
+        self.assertEqual(result.status_code, 404) 
+
+    def test_login_url(self):
+        result = self.app.get('/register') 
+        self.assertEqual(result.status_code, 200)
+
+    def test_login_url(self):
+        result = self.app.get('/create/') 
+        self.assertEqual(result.status_code, 200) 
 
     def test_null_username(self):
         """method to checking when user name is empty"""
