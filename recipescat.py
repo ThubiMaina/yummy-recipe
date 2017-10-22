@@ -24,7 +24,7 @@ class RecipeCat(object):
                     }
                     return 1
                 else:
-                    return 2
+                    return "name exists"
             else:
                 self.Recipecats[category] = {
                 'category':category,
@@ -32,7 +32,7 @@ class RecipeCat(object):
                 }
                 return 1
         else:
-            return 3
+            return "blank"
 
     def get_recipecat_lists(self):
         """defining method to get one recipe categories"""
@@ -66,5 +66,5 @@ class RecipeCat(object):
             del self.Recipecats[category]
             return 1
         else:
-            return 2
+            return "does not exist"
 
