@@ -50,20 +50,24 @@
     
 
     <div class="container">
+
+      {% if data %}
+    <center><div class="alert alert-warning alert-dismissable">
+  <a href="/create" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{data}}</strong>
+</div></center>
+    {% endif%}
     
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6">
             
-            <form method="POST" action="">
+            <form method="POST" action="{{url_for('createrecipecats')}}">
                 <h1>Create a recipe</h1>
                     
                     <div class="form-group">
                             <label>Recipe category</label>
                             <input type="text" class= "form-control" name="category" placeholder="Appetizer, Dessert,..." > 
                     </div> 
-                    <div class="form-group">
-                        <label>Recipe Name</label>
-                        <input type="text" class="form-control" name="recipe" placeholder="Recipe Name"></div>            
                 <button type="submit" class="btn btn-primary">Create</button>
             </form>
         </div>

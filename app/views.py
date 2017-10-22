@@ -1,11 +1,14 @@
-from flask import Flask, render_template, request, session, redirect, url_for,g
-import os
+"""The views"""
 from user import User
+from recipescat import RecipeCat
+from flask import Flask, render_template, request, session, redirect, url_for
+
 from app import app
 
-app.secret_key = os.urandom(24)
+
 """Instantiating objects"""
 newUser = User()
+newRecipeCat = RecipeCat()
 
 @app.route('/')
 def home():
@@ -24,20 +27,29 @@ def register():
         if result == 1:
             session['user'] = username
             message = "Account created sucessfully"
-            return render_template('login.html', data = message)
-        elif result == 6:
+            return render_template('login.html', data=message)
+
+        elif result == 'You have blank fields':
             message = ("please fill all the fields")
-            return render_template('register.html', data = message)
-        elif result == 5:
+            return render_template('register.html', data=message)
+
+        elif result == "special characters in username":
             message = ("Special characters not allowed in field name")
             return render_template('register.html', data=message)
-        elif result == 3:
+        elif result == "password less than 6":
+            message = (
+                "Password should have minimum six characters")
+            return render_template('register.html', data=message)
+        elif result == "username exists":
+            message = ("Username has alredy been taken")
+            return render_template('register.html', data=message)
+        elif result == "password mismatch":
             message = ("password do not match")
             return render_template('register.html', data=message)
-        elif result == 2:
+        elif result == "invalid email":
             error = "email must be a valid email"
             return render_template('register.html', data=error)
-        elif result == 4:
+        elif result == "email registered":
             error = "email already registered"
             return render_template('register.html', data=error)
     return render_template('register.html')   
@@ -54,13 +66,13 @@ def login():
             session['user'] = username
             session['email'] = email
             return render_template('home.html', data=session)
-        elif result == 2:
+        elif result == "password mismatch":
             error = "Wrong Password"
             return render_template('login.html',data=error) 
-        elif result == 3:
+        elif result == "not registered":
             error = "The user does not exist please register and try again"
             return render_template('login.html', data=error)    
-        elif result == 4:
+        elif result == "blank fields":
             error = "Please fill all the fields"
             return render_template('login.html', data=error)        
         else:
@@ -69,13 +81,62 @@ def login():
     else:
         return render_template('login.html')
 
-@app.route('/create/')
-def create():
-    return render_template("create.html")
+@app.route('/create/', methods=['GET', 'POST'])
+def createrecipecats():
+    """Handles creation of recipe categories"""
+    if  'email' in session:
+        if request.method == "POST":
+            sentence = request.form['category']
+            Catlist = sentence.split(' ')
+            category = ''.join(Catlist)
+            owner = session['email']
+            result = newRecipeCat.create(category, owner)
+            print(category)
+            if result == "name exists":
+                error = "that name already exists"
+                return render_template('create.html', data=error)
+            if result == "blank":
+                error = "Provide a category name"
+                return render_template('create.html', data=error)                   
+            if result == 1:
+                result = newRecipeCat.get_recipecat_lists()   
+                return render_template('display.html', datas=result,)        
+            return redirect('/display')
+        else:
+            return render_template('create.html')
+    else:
+        return render_template('login.html')
+
+@app.route('/delete/<category>')
+def delete(category):
+    """define route to delete a recipe category"""
+    if  'email' in session:
+        res = newRecipeCat.get_recipecat_lists()
+        if res:
+            result = newRecipeCat.delete(category)
+            if result == 1:
+                message = "successfully deleted"
+                return redirect(url_for('display', data=message))
+            else:
+                message = "Category not deleted"
+                return redirect(url_for('display', data=message))                
+        else:
+            message = "not found"
+            return render_template('create.html', data=message)
+    else:
+        return render_template('create.html')
+    return render_template('login.html')
 
 @app.route('/display')
 def display():
-    return render_template('display.html')
+    if  'email' in session:
+        if request.method == 'GET':
+            result = newRecipeCat.get_recipecat_lists()
+            return render_template('display.html', data = result)
+
+    error = 'Log in to see your dashboard'           
+    return render_template('login.html', data=error)    
+
 
 @app.route('/addrecipe')
 def addrecipe():
