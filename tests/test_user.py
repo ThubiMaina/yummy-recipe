@@ -26,11 +26,6 @@ class TestUser(unittest.TestCase):
         result = self.newUser.login(self.email, self.password)
         self.assertEqual(1, result)   
 
-    # Test for successful registration
-    def test_user_registration(self):
-        response = self.newUser.register(self.email, self.username, self.password, self.cpassword)
-        self.assertEqual(response.status_code, 200)
-        
     def test_null_username(self):
         """method to checking when user name is empty"""
         result = self.newUser.register(self.email, '', self.password, self.cpassword)
