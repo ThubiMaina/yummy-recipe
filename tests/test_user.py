@@ -37,11 +37,11 @@ class TestUser(unittest.TestCase):
         result = self.app.get('/login/') 
         self.assertEqual(result.status_code, 404) 
 
-    def test_login_url(self):
+    def test_register_url(self):
         result = self.app.get('/register') 
         self.assertEqual(result.status_code, 200)
 
-    def test_login_url(self):
+    def test_create_url(self):
         result = self.app.get('/create/') 
         self.assertEqual(result.status_code, 200) 
 
