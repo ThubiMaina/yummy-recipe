@@ -41,9 +41,9 @@ class User(object):
                                 'username': username, 
                                 'email': email,
                                 'password': password
-                                } 
-                print(users.keys)  
+                                }   
                 return 1
+                print(users.keys)
         
         return  msg
 
