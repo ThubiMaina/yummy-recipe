@@ -60,14 +60,17 @@
     
     <div class="row">
         <div class="col-sm-offset-3 col-sm-6">
-            {% if data%}
-            <form  action="" method="POST">
+{{datas}}
+            {% if datas%}
+      
+          
+            <form  action="{{url_for('editcategory', category=datas['category'])}}" method="POST">
                 <h1>Edit The Recipe Category</h1>
                     
                     <div class="form-group">
                             <label>Recipe category</label>
-                            <input type="text" class= "form-control" name="category" value="{{data["category"] }}" placeholder="Appetizer, Dessert,..." > 
-      <input type="hidden"  style="width: 500px" name="old" value="{{data["category"] }}"></center>
+                            <input type="text" class= "form-control" name="category" value="{{datas['category'] }}" placeholder="Appetizer, Dessert,..." > 
+       <input type="hidden"  style="width: 500px" name="old" value="{{datas['category'] }}"></center>
                     </div> 
                 <button type="submit" class="btn btn-primary">Update</button>
             </form>
