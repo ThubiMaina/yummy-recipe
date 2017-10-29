@@ -15,7 +15,7 @@ class User(object):
         self.email = email
         self.password = password
         self.cpassword = cpassword
-   
+
     def register(self, email, username, password, cpassword):
         """defining method to create account"""
         #check to make sure fields are not blank
@@ -30,23 +30,18 @@ class User(object):
                 msg = "email registered"
             elif not re.search(regex, result):
                 msg = "invalid email"
-            elif username in users.values():
-                msg = "username exists"
-            elif password != cpassword: 
+            elif password != cpassword:
                 msg = "password mismatch"
             elif len(password) < 6:
                 msg = "password less than 6"
             else:
                 users[email] = {
-                                'username': username, 
-                                'email': email,
-                                'password': password
-                                }   
+                    'username': username,
+                    'email': email,
+                    'password': password}
                 return 1
-                print(users.keys)
-        
-        return  msg
-
+            print(users.keys)
+        return msg
 
     def login(self, email, password):
         """ defining method to validate user"""
