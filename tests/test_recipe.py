@@ -20,7 +20,7 @@ class TestRecipeCat(unittest.TestCase):
     def test_if_category_name_is_empty(self):
         """defining method to test for adding a category with the name blank """
         output = self.category.create('', self.owner)
-        self.assertEqual('blank', output, "name cannot be blank")
+        self.assertEqual('blank category', output, "name cannot be blank")
 
 if __name__ =='main':
     unittest.main()    
