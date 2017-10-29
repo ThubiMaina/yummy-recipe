@@ -41,6 +41,7 @@
     {% else %}
       <li><a href="/login">Login <span class="sr-only">(current)</span></a></li>
       <li><a href="/register">Sign Up <span class="sr-only">(current)</span></a></li>
+
     {% endif %}
 </ul>
   </nav>
@@ -52,7 +53,9 @@
    <div class="add-new">
      <center style="margin-top: 10px; padding: 30px"><h1 style="color: #000000">Create Your recipe to make your cooking delicious</h1><br>
       <h4 style="color: #000000">
-     {{ session['user'] }} Click on the icon to add a recipe</h4></center>
+      Click on the icon to add a recipe</h4>
+     <h4 style="color: #000000">
+      User:{{ session['user'] }}</h4></center>
      <center ><div class="add"><a href="/create" ><img src="../static/images/2.png" style="margin-top:-30px;margin-left: -40px; height: 50px; width: 90px"></a></div></center>
 
    </div>
