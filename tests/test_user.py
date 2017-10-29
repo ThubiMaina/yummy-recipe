@@ -27,23 +27,27 @@ class TestUser(unittest.TestCase):
     def test_success_login(self):
         """ method to test for login success"""
         result = self.newUser.login(self.email, self.password)
-        self.assertEqual(1, result)   
+        self.assertEqual(1, result)
 
     def test_application_up_and_running(self):
-        result = self.app.get('/') 
+        """ Testing the index link"""
+        result = self.app.get('/')
         self.assertEqual(result.status_code, 200)
 
     def test_login_url(self):
-        result = self.app.get('/login/') 
-        self.assertEqual(result.status_code, 404) 
+        """ Testing the user login link"""
+        result = self.app.get('/login/')
+        self.assertEqual(result.status_code, 404)
 
     def test_register_url(self):
-        result = self.app.get('/register') 
+        """ Testing the user register link"""
+        result = self.app.get('/register')
         self.assertEqual(result.status_code, 200)
 
     def test_create_url(self):
-        result = self.app.get('/create/') 
-        self.assertEqual(result.status_code, 200) 
+        """ Testing the user create category link"""
+        result = self.app.get('/create/')
+        self.assertEqual(result.status_code, 200)
 
     def test_null_username(self):
         """method to checking when user name is empty"""
@@ -65,11 +69,10 @@ class TestUser(unittest.TestCase):
         result = self.newUser.register(self.email, self.username, '', self.cpassword)
         self.assertEqual('You have blank fields', result, 'enter the password')
 
-   
     def test_special_characters(self):
         """defining method to test for special characters in the user name"""
         result = self.newUser.register(self.email, "##", self.password, self.cpassword)
-        self.assertEqual("special characters in username", result, 'user name cannot have special characters')
+        self.assertEqual("special characters in username", result, 'No characters')
 
     def test_email_exists(self):
         """method to check if email provided has been used to register another user"""
