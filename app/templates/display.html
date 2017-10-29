@@ -64,10 +64,10 @@
       {% for item in datas %}
           
           <tr>
-            <td>{{ datas[item]["category"] }}</td>
+            <td><a href="/detail/{{ datas[item]['category'] }}"> {{ datas[item]["category"] }}</a></td>
             <td>
             <td>
-              <a href="" class="btn btn-primary btn-md ">edit</a>
+              <a href="{{url_for('editcategory', category=datas[item]["category"])}}" class="btn btn-primary btn-md ">edit</a>
               <a href="/addrecipe" class="btn btn-primary  btn-md ">add recipe</a>
               <a href= {{url_for('delete', category=datas[item]["category"])}} class="btn btn-primary  btn-md ">delete</a>
             </td>
@@ -77,6 +77,7 @@
    </table>
    
   </section>
+  
   <center><footer class="footer" style="margin-top: 100px ; color: #000000 ; font-weight: bold; font-weight: 900;" ><small>copyright @ Yummys' Recipe 2017|Developer @ Maina Erick</small></footer></center>
 
 </body>
