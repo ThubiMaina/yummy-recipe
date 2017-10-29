@@ -4,7 +4,7 @@
 
 class RecipeCat(object):
     Recipecats = {}
-    """an empty list to store my recipe categories"""
+    """an empty dictionary to store my recipe categories"""
     def __init__(self, category=None, owner=None):
         """initializing class instance variables"""
         self.category = category
@@ -21,18 +21,20 @@ class RecipeCat(object):
                     self.Recipecats[category] = {
                     'category':category,
                     'owner':owner,
+                    'recipes':{}
                     }
                     return 1
                 else:
-                    return "name exists"
+                    return 2
             else:
                 self.Recipecats[category] = {
                 'category':category,
                     'owner':owner,
+                    'recipes':{}
                 }
                 return 1
         else:
-            return "blank"
+            return "blank category"
 
     def get_recipecat_lists(self):
         """defining method to get one recipe categories"""
@@ -59,6 +61,18 @@ class RecipeCat(object):
         """defining method to get one recipe lists"""
         return self.Recipecats[category]    
 
+    def edit(self, old, category, owner):
+        """defining method to delete bucket list"""
+        if  category != '':
+            del self.Recipecats[old]
+            self.Recipecats[category] = {
+            'category' : category,
+            'owner' : owner,
+            }
+            return 1
+        else:
+            return 2
+
     def delete(self, category):
         """defining method to delete a recipe category"""
         if category in self.Recipecats.keys():
@@ -66,5 +80,5 @@ class RecipeCat(object):
             del self.Recipecats[category]
             return 1
         else:
-            return "does not exist"
+            return 2
 
