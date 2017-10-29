@@ -68,3 +68,4 @@ class User(object):
             result = users[email]
             return result['email']
         return False
+        
