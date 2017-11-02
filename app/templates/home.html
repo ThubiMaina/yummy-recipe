@@ -35,27 +35,27 @@
       
       
       <li><a href="/display">Recipes</a></li>
-
+      </ul>
+    <ul class="nav navbar-nav navbar-right">
       {% if 'email' in session %}
       <li><a href="/logout">Logout <span class="sr-only">(current)</span></a></li>
     {% else %}
       <li><a href="/login">Login <span class="sr-only">(current)</span></a></li>
       <li><a href="/register">Sign Up <span class="sr-only">(current)</span></a></li>
-
     {% endif %}
+  
 </ul>
   </nav>
   
-<body style="background-image:  url(../static/images/6.jpg); background-color: #DDD padding: 20px;
+<body style="background-image:  url(../static/images/7.jpg); background-color: #DDD padding: 20px;
         margin-top: 0px;"  >
   
  <section>
    <div class="add-new">
      <center style="margin-top: 10px; padding: 30px"><h1 style="color: #000000">Create Your recipe to make your cooking delicious</h1><br>
       <h4 style="color: #000000">
-      Click on the icon to add a recipe</h4>
-     <h4 style="color: #000000">
-      User:{{ session['user'] }}</h4></center>
+      Click on the icon to add a recipe category</h4>
+     </center>
      <center ><div class="add"><a href="/create" ><img src="../static/images/2.png" style="margin-top:-30px;margin-left: -40px; height: 50px; width: 90px"></a></div></center>
 
    </div>
