@@ -13,7 +13,7 @@
 </head>
 <style type="text/css">
   body {
-    background-image: url(../static/images/9.jpg);
+    background-image: url(../static/images/7.jpg);
     background-size: cover;
     color: white;
     background-repeat: no-repeat;
@@ -47,15 +47,27 @@
 
   <nav class="navbar navbar-default">
     <ul class="nav navbar-nav">
-      <li><a href="/">Home</a></li>
+      <li class="active"><a href="/home">Home</a></li>
+      <li><a href="/display">Recipes</a></li>
     </ul>
-  </nav>
+    <ul class="nav navbar-nav navbar-right">
+      {% if 'email' in session %}
+      <li><a href="/logout">Logout <span class="sr-only">(current)</span></a></li>
+    {% else %}
+      
+      <li><a href="/register">Sign Up <span class="sr-only">(current)</span></a></li>
+
+    {% endif %}
+    </ul>
+  </div>
+</nav>
+
 
   <div class="container">
     
      {% if data %}
     <center><div class="alert alert-warning alert-dismissable">
-  <a href="/login" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <a href="/" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <strong>{{data}}</strong>
 </div></center>
     {% endif%}
