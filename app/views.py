@@ -192,7 +192,7 @@ def editcategory(category):
     else:
         return render_template('login.html')
 
-@app.route('/deleterecipe',methods=['GET', 'POST'])
+@app.route('/deleterecipe/<category>',methods=['GET', 'POST'])
 def deleterecipe(category):
     """Handles requests for deleting a recipe"""
     if g.user:

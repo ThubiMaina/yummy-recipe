@@ -1,5 +1,6 @@
 """test methods for the user class"""
 import unittest
+import user
 from user import User
 from app import app
 

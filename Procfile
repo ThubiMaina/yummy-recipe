@@ -1,0 +1,1 @@
+web: waitress --port=5000 run:app

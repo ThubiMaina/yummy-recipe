@@ -1,3 +1,4 @@
 env
 yummy-recipe
 __pycache__
+.coverage
