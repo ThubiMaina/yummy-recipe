@@ -32,13 +32,13 @@
 </head>
 <nav class="navbar navbar-default">
     <ul class="nav navbar-nav">
-      <li><a href="/">Home</a></li>
+      <li><a href="/home">Home</a></li>
    
     </ul>
-    <center><a href="/create" class="btn btn-primary  btn-md  ">Add Another Category</a></center>
+   
   </nav>
  
-<body style="background-image:  url(../static/images/4.jpg); background-color: #DDD">
+<body style="background-image:  url(../static/images/7.jpg); background-color: #DDD">
   
   <!-- {% if data %}
     <center><div class="alert alert-warning alert-dismissable">
@@ -51,6 +51,7 @@
     <section>
   
      <center style="margin-top: 10px; padding: 30px"><h2 style="color: #000000">Welcome to your Recipe List, {{ session['user'] }}</h2><br><h4 style="color: #000000">
+       <center><a href="/create" class="btn btn-primary  btn-md  ">Add Another Category</a></center>
      
    <table class="table table-hover">
       <thead>
@@ -62,16 +63,18 @@
       </thead>
       <tbody>
       {% for item in datas %}
+      {% if  session['email'] == datas[item]["owner"]  %}
           
           <tr>
-            <td><a href="/detail/{{ datas[item]['category'] }}"> {{ datas[item]["category"] }}</a></td>
+            <td> {{ datas[item]["category"] }}</td>
             <td>
-            <td>
+              <a href="/detail/{{ datas[item]['category'] }}" class="btn btn-primary  btn-md ">Detail</a>
               <a href="{{url_for('editcategory', category=datas[item]["category"])}}" class="btn btn-primary btn-md ">edit</a>
-              <a href="/addrecipe" class="btn btn-primary  btn-md ">add recipe</a>
+              <a href="/detail/{{ datas[item]['category'] }}" class="btn btn-primary  btn-md ">add recipe</a>
               <a href= {{url_for('delete', category=datas[item]["category"])}} class="btn btn-primary  btn-md ">delete</a>
             </td>
           </tr>
+          {% endif %}
           {% endfor %}  
       </tbody>
    </table>
