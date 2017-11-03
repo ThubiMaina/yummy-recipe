@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    
+    <title>Dashboard </title>
+    <style type="text/css">
+    body{
+      
+
+       background-size: cover;
+       color: white;
+       background-repeat: no-repeat;
+       background-position: center;
+       background-attachment: fixed;
+
+     }
+    section{
+        background-color: rgba(65, 130, 6, 0.54);
+        padding: 30px;
+        margin-top: 50px;
+        margin-bottom: 60px;
+        color: white;
+        box-shadow: 10px 10px 5px rgba(6, 1, 1, 0.43)
+       }
+      
+	</style>
+</head>
+<nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+      <li><a href="/home">Home</a></li>
+   {% if 'email' in session %}
+      <li><a href="/logout">Logout <span class="sr-only">(current)</span></a></li>
+    {% endif %}
+    </ul>
+   
+  </nav>
+ 
+<body style="background-image:  url(../static/images/7.jpg); background-color: #DDD">
+  
+  <!-- {% if data %}
+    <center><div class="alert alert-warning alert-dismissable">
+  <a href="/display" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{data}}</strong>
+</div></center>
+    {% endif%}
+   -->
+   
+    <section>
+  
+     <center style="margin-top: 10px; padding: 30px"><h2 style="color: #000000">Welcome to your Recipe List, {{ session['user'] }}</h2><br><h4 style="color: #000000">
+       <center><a href="/create" class="btn btn-primary  btn-md  ">Add Another Category</a></center>
+     
+   <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>category</th>
+          <th>Action</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+      {% for item in datas %}
+      {% if  session['email'] == datas[item]["owner"]  %}
+          
+          <tr>
+            <td> {{ datas[item]["category"] }}</td>
+            <td>
+              <a href="/detail/{{ datas[item]['category'] }}" class="btn btn-primary  btn-md ">Detail</a>
+              <a href="{{url_for('editcategory', category=datas[item]["category"])}}" class="btn btn-primary btn-md ">edit</a>
+              <a href="/detail/{{ datas[item]['category'] }}" class="btn btn-primary  btn-md ">add recipe</a>
+              <a href= {{url_for('delete', category=datas[item]["category"])}} class="btn btn-primary  btn-md ">delete</a>
+            </td>
+          </tr>
+          {% endif %}
+          {% endfor %}  
+      </tbody>
+   </table>
+   
+  </section>
+  
+  <center><footer class="footer" style="margin-top: 100px ; color: #000000 ; font-weight: bold; font-weight: 900;" ><small>copyright @ Yummys' Recipe 2017|Developer @ Maina Erick</small></footer></center>
+
+</body>
+</html>
