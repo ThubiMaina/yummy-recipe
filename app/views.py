@@ -19,10 +19,14 @@ def is_logged_in(f):
             return redirect(url_for('login'))
     return wrap
 
+@app.route('/')
+def landingpage():
+    return render_template('landingpage.html')
+
 @app.route('/home')
 @is_logged_in
 def home():
-    return redirect(url_for('login'))
+    return render_template('home.html')    
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -59,9 +63,9 @@ def register():
         elif result == "email registered":
             error = "email already registered"
             return render_template('register.html', data=error)
-    return render_template('register.html')   
+    return render_template('register.html')  
 
-@app.route('/' , methods=['GET' , 'POST'])
+@app.route('/login' , methods=['GET' , 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form['email']
@@ -113,7 +117,7 @@ def createrecipecats():
         else:
             return render_template('create.html')
     else:
-        return render_template('login.html')
+        return redirect('/login')
 
 @app.route('/delete/<category>')
 def delete(category):
@@ -133,8 +137,7 @@ def delete(category):
             return render_template('create.html', data=message)
     else:
         return render_template('create.html')
-    return render_template('login.html')
-
+    return redirect('/login')
 @app.route('/display')
 def display():
     if g.user:
@@ -144,7 +147,7 @@ def display():
             return render_template('display.html', datas = result)
 
     error = 'Log in to see your dashboard'           
-    return render_template('login.html', data=error)
+    return render_template('login.html',data = error)
 
 @app.route('/detail/<category>', methods=['GET', 'POST'])
 def catdetail(category):
@@ -167,11 +170,11 @@ def catdetail(category):
                 return render_template('detail.html',datas=res, posts=recipes)
             elif result == "blank fields":
                 error = "Please fill all the fields"
-                return render_template('detail.html', data=error)          
+                return render_template('detail.html',datas=res, data=error)          
         else:
             return render_template('detail.html' )      
     else:
-        return render_template('login.html')
+        return redirect('/login')
 
 
 @app.route('/editcat/<category>', methods=['GET', 'POST'])
@@ -190,32 +193,49 @@ def editcategory(category):
                 result = newRecipeCat.edit(old,new,owner)
         return redirect('/display')
     else:
-        return render_template('login.html')
+        return redirect('/login')
 
-@app.route('/deleterecipe/<category>',methods=['GET', 'POST'])
-def deleterecipe(category):
+@app.route('/deleterecipe/<category>/<recipe>',methods=['GET', 'POST'])
+def deleterecipe(category,recipe):
     """Handles requests for deleting a recipe"""
     if g.user:
         recipes = newRecipeCat.getrecipes(category)
-        if recipes:
-            result = newRecipeCat.deleterecipe(category)
-            if result == True:
-                msg = 'recipe was deleted'
-                return redirect(url_for('catdetails', data=msg))
-            if result == 'does not exist':
-                mgs = 'item does not exist in the dictionary'
-                return redirect(url_for('catdetails', data=msg))
-        return redirect('/display')
+        res = newRecipeCat.get_recipecat_list(category)
+        result = newRecipeCat.deleterecipe(recipe)
+        if result == True:
+            return render_template('detail.html',datas=res, posts=recipes)
+        return render_template('detail.html',datas=res, posts=recipes)
+    return redirect('/login')
 
-        
-    return render_template('login.html')
+@app.route('/editrecipe/<category>/<recipe>',methods=['GET', 'POST'])
+def editrecipe(category, recipe):
+    """Handles  requests for editing an item"""
+    if g.user:
+        recipes = newRecipeCat.getrecipes(category)
+        res = newRecipeCat.get_recipecat_list(category)
+        if request.method == 'GET':
+            return render_template('editrecipe.html', posts=recipes, datas=res)
+
+        if request.method == 'POST':
+            recipe = request.form['oldrecipe']
+            newrecipe = request.form['recipe']
+            description = request.form['olddescription']
+            newdescription = request.form['description']
+            owner = session['email']
+            result = newRecipeCat.editrecipe(recipe,newrecipe,
+                description,newdescription,owner)
+            if result ==True:
+                return render_template('detail.html',datas=res, posts=recipes)
+            return render_template('detail.html',datas=res, posts=recipes)
+    else:
+        return redirect('/login')
 
 
 @app.route('/logout')
 def logout():
     """Handles requests to logout a user"""
     session.pop('email', None)
-    return redirect(url_for('home'))
+    return redirect(url_for('landingpage'))
 
 @app.before_request
 def before_request():

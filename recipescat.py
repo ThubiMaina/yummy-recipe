@@ -12,29 +12,16 @@ class RecipeCat(object):
     def create(self, category, owner):
         """defining method to create recipe category list"""
         if category != '':
-            #call the get_myrecipe_lists function that contains individual recipe categories 
-            my_recipecats = self.get_myrecipe_lists(owner)
-            if my_recipecats != {}:
                 #check's if user already has a category added
-                if category not in my_recipecats.keys():
-                    Recipecats[category] = {
-                    'category':category,
-                    'owner':owner,
-                    'recipe':[]
-                    }
-                    return True
-                else:
-                    return "This category exists"
-            else:
+            if category not in Recipecats.keys():
                 Recipecats[category] = {
-                    'category':category,
-                    'owner':owner,
-                    'recipe':[]
-                    
+                'category':category,
+                'owner':owner,
+                'recipe':[]
                 }
                 return True
-        else:
-            return "blank category"
+            return "This category exists"
+        return "blank category"
 
     def get_recipecat_lists(self):
         """defining method to get one recipe categories"""
@@ -85,12 +72,15 @@ class RecipeCat(object):
 
     def createrecipe(self, recipe, description, category):
         """defining method to create an recipe in a category"""
-        if recipe != '' or description !='':
-            Recipecats[category]['recipe'].append({
-                'recipe': recipe,
-                'description': description,
-                'category':category})
-            return True
+        if recipe != '' and description !='':
+            for dic in Recipecats:
+                if recipe not in Recipecats[dic]['recipe']:
+                    Recipecats[category]['recipe'].append({
+                        'recipe': recipe,
+                        'description': description,
+                        'category':category})
+                    return True
+                return 'exists'    
         return "blank fields"    
  
     def getrecipes(self, category):
@@ -99,28 +89,24 @@ class RecipeCat(object):
 
     def deleterecipe(self, recipe, category):
         """ defining method to delete an recipe from category"""
-        print("I am in deleterecipe",Recipecats )
-        for dic in Recipecats:
-            print( " after ",Recipecats[dic])
-            print( "recipes", Recipecats[dic]['recipe'])
+        if recipe != '' and description !='':
+            for dic in Recipecats:                
+                for recipes in Recipecats[dic]['recipe']:
+                    if recipes['recipe'] == recipe:
+                        Recipecats[dic]['recipe'].remove(recipes)
+                    return 'does not exist'
+                return 'item already exists'        
 
-            for recipes in Recipecats[dic]['recipe']:
-                if recipes['recipe'] == recipe:
-                    print('dsfhjbfs')
-                    Recipecats[dic]['recipe'].remove(recipes)
-                    print('dsfhjbfs2', Recipecats[dic]['recipe'])
+        return 'blank fields'
 
-                return 'does not exist'
-                # recipes.pop(recipes['recipe'])
-            print('success')
-                
-                # 
-
-            # # 
-            # #     del Recipecats[category]['recipe']
-            # #     result = True
-            # #     # print('cool cool')
-            # else:
-            #     result = "does not exist"
-
-        # return result 
+    def editrecipe(self, recipe,newrecipe,
+                description,newdescription,owner):
+        """ defining method to edit a recipe"""
+        if recipe != '' and description !='':
+            for dic in Recipecats:
+                for recipes in Recipecats[dic]['recipe']:
+                    if recipes['recipe'] == recipe:
+                        del recipes['recipe']
+                        recipes['recipe'] = newrecipe
+                        return True
+        return redirect('/login')

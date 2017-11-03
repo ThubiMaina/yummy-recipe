@@ -47,8 +47,6 @@
 
   <nav class="navbar navbar-default">
     <ul class="nav navbar-nav">
-      <li class="active"><a href="/home">Home</a></li>
-      <li><a href="/display">Recipes</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       {% if 'email' in session %}
@@ -67,7 +65,7 @@
     
      {% if data %}
     <center><div class="alert alert-warning alert-dismissable">
-  <a href="/" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <a href="/login" class="close" data-dismiss="alert" aria-label="close">&times;</a>
   <strong>{{data}}</strong>
 </div></center>
     {% endif%}

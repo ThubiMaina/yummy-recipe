@@ -40,15 +40,15 @@ class TestUser(unittest.TestCase):
         result = self.app.get('/login/')
         self.assertEqual(result.status_code, 404)
 
-    def test_register_url(self):
-        """ Testing the user register link"""
-        result = self.app.get('/register')
+    def test_home_url(self):
+        """ Testing the user home page link redirect"""
+        result = self.app.get('/')
         self.assertEqual(result.status_code, 200)
 
     def test_create_url(self):
         """ Testing the user create category link"""
         result = self.app.get('/create/')
-        self.assertEqual(result.status_code, 200)
+        self.assertEqual(result.status_code, 302)
 
     def test_null_username(self):
         """method to checking when user name is empty"""
@@ -97,6 +97,11 @@ class TestUser(unittest.TestCase):
         result = self.newUser.login(self.email, '')
         self.assertEqual("blank fields", result, "Please fill the password field")
 
+    def test_wrong_login_password(self):
+        """defining method to test if login password is equal to register passsword"""
+        self.newUser.register(self.email, self.username, self.password, self.cpassword)
+        result = self.newUser.login('erick@gmail.com', 'pass123')
+        self.assertEqual("password mismatch", result,)
 
 if __name__ == 'main':
     unittest.main()

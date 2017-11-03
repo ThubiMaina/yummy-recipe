@@ -33,7 +33,9 @@
 <nav class="navbar navbar-default">
     <ul class="nav navbar-nav">
       <li><a href="/home">Home</a></li>
-   
+   {% if 'email' in session %}
+      <li><a href="/logout">Logout <span class="sr-only">(current)</span></a></li>
+    {% endif %}
     </ul>
    
   </nav>

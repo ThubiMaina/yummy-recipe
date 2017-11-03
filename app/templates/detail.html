@@ -17,7 +17,7 @@
         </nav>
     <style type="text/css">
      body{
-       /*background-image: url(/static/images/7.jpg);*/
+       background-image: url(../static/images/7.jpg);
        background-size: cover;
        background-color: white;
        background-repeat: no-repeat;
@@ -51,18 +51,22 @@
     
 
     <div class="container">
+       {% if data %}
+    <center><div class="alert alert-warning alert-dismissable">
+  <a href="/detail/{{datas['category'] }}" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  <strong>{{data}}</strong>
+</div></center>
+    {% endif%}
     
     <div class="row">
         <div class="col-sm-offset-1 col-sm-9">
-          <h3></h3>
-          {{datas}}
             <form  action="/detail/{{datas['category'] }}", method="POST">
                  <h1>Category Name: {{datas['category'] }}</h1>
                 <center><h3>Owner: {{session['user']}}</h3></center> 
                   
                     <div class="form-group">
                         <label>Recipe name</label>
-                        <input type="text" class="form-control" name="recipe" placeholder="name of recipe">
+                        <input type="textarea" class="form-control" name="recipe" placeholder="name of recipe">
                          <input type="hidden"   name="category" value="{{datas['category'] }}">
                   <input type="text" class="form-control" name="description" placeholder="methods and ingredients">
 
@@ -98,9 +102,10 @@ td, th {
       <div><td>{{dic['recipe']}}</td></div>
     <div><td>{{dic['description']}}</td></div>
     <td>
-        <a href={{url_for('deleterecipe', recipe=dic['recipe'])}}>
-          <input type="hidden" name="recipe" value={{dic['recipe'] }}>
+        <a href="/deleterecipe/{{datas['category']}}/{{dic['recipe']}}">
           <span class="glyphicon glyphicon-trash"></span>
+          <a href="/editrecipe/{{datas['category']}}/{{dic['recipe']}}">
+          <span class="glyphicon glyphicon-pencil"></span>
         </a>
       
     </td>
